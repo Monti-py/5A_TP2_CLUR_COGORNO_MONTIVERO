@@ -27,3 +27,4 @@ class CreditCard extends Cards{
     //Si hicieron algún pago menor = balance * interes (1,algo)
 }
 clients[1].creditCards.push(new CreditCard("Godibank",772,"papadopulus hernan"))
+clients[1].creditCards.push(new CreditCard("Godibank",773,"papadopulus hernan"))
