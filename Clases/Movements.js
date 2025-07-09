@@ -13,6 +13,6 @@ class Movement{
 }
 
 //Caso gasto de débito
-new Movement("COTO", 1000);
+clients[0].savingsBanks[0].movements.push(new Movement("COTO", 1000));
 //Caso gasto de crédito
-new Movement("CompraGamer", 200000, 3);
+clients[1].savingsBanks[1].movements.push(new Movement("CompraGamer", 200000, 3));

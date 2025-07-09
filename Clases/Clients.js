@@ -21,7 +21,7 @@ class Clients{
     }
 }
 
-const clients = [] //crear 4ç
+const clients = [] //crear 4
 clients.push(new Clients(45415066, "pepe","papadopulus","hernan"))
 clients.push(new Clients(45824885, "tronco", "juan", "firme"))
 clients.push(new Clients(12522546, "flash","felipe","bochornoso" ))

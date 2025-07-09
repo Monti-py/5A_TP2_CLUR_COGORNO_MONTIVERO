@@ -7,6 +7,6 @@ class Cards {
         this.emitionDate = new Date()
         this.expireDate = this.emitionDate.getFullYear() + 5;
         this.securityCode = securityCode
-        this.consumptions = []
+        this.movements = []
     }
 }
