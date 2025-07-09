@@ -1,11 +1,11 @@
 /**
  * Busca el indice en el array "clientes" y devuelve la poscicion en el mismo
- * @param {int} id 
+ * @param {int} id_client 
  * @returns poscicion del cliente en el array
- */
-function findClient(id){
+*/
+function findClientByClientId(id_client){
     for(let i = 0; i < clients.length; i++){
-        if(clients[i].id === id){
+        if(clients[i].id === id_client){
             return i;
         }
     }
@@ -16,25 +16,26 @@ function findClient(id){
  * Recibe el id de un cliente y devuelve un array con todas sus cajas de ahorro
  * @param {int} id_client 
  * @returns @param {Array} cajas_de_ahorro_del_cliente
- */
-function clientSavingBanks(id_client){
-    const client_index = findClient(id_client);
-    const banks = []
-    for(let i=0;i<clients[client_index].savingsBanks.length;i++){
-        banks.push(clients[client_index].savingsBanks[i])
-    }
-    return banks
+*/
+function findClientSavingBankByClientId(id_client){
+  const client_index = findClientByClientId(id_client);
+  const banks = []
+  for(let i=0;i<clients[client_index].savingsBanks.length;i++){
+    banks.push(clients[client_index].savingsBanks[i])
+  }
+  return banks
 }
 
 /**
- * 
+ * Recibe el id de un cliente y devuelve un array con todas sus tarjetas de debito
+ * asociadas a sus cajas de ahorro
  * @param {int} id_client 
  * @returns @param {Array} debit_cards_del_cliente
- */
-function clientDebitCard(id_client){
+*/
+function findClientDebitCardsByClientId(id_client){
     const debit_cards = []
-    const client_index = findClient(id_client)
-    const client_banks = clientSavingBanks(id_client)
+    const client_index = findClientByClientId(id_client)
+    const client_banks = findClientSavingBankByClientId(id_client)
     for(let i = 0;i<client_banks.length;i++){
         debit_cards[i] = []
         if(clients[client_index].savingsBanks[i].debitCards.length>0){
@@ -48,49 +49,57 @@ function clientDebitCard(id_client){
 }
 
 /*function encontrarDebitCardPorId(idBuscado) {
-    for (const cliente of clients) {
-      for (const cuenta of cliente.savingsBanks) {
-        for (const tarjeta of cuenta.debitCards) {
-          if (tarjeta.id === idBuscado) {
-            return tarjeta;
-          }
+  for (const cliente of clients) {
+    for (const cuenta of cliente.savingsBanks) {
+      for (const tarjeta of cuenta.debitCards) {
+        if (tarjeta.id === idBuscado) {
+          return tarjeta;
         }
       }
     }
-    return null; // No se encontró la tarjeta
   }
- */
+  return null; // No se encontró la tarjeta
+}*/
 
-  function findDebitCardById(id_card) {
-    let found_card = null;
-  
-    for (let i = 0; i < clients.length; i++) {
-      const client_banks = clients[i].savingsBanks;
-  
-      for (let j = 0; j < client_banks.length; j++) {
-        const debit_cards = client_banks[j].debitCards;
-  
-        for (let k = 0; k < debit_cards.length; k++) {
-          if (debit_cards[k].id === id_card) {
-            found_card = debit_cards[k];
-          }
+
+/** 
+ * Bysca una tarjeta de debito por su id y devuelve el objeto tarjeta
+ * @param {int} id_client 
+ * @returns @param {int} client_index
+*/
+function findDebitCardByDebitCardId(id_debit_card) {
+  let found_card = null;
+
+  for (let i = 0; i < clients.length; i++) {
+    const client_banks = clients[i].savingsBanks;
+    for (let j = 0; j < client_banks.length; j++) {
+      const debit_cards = client_banks[j].debitCards;
+      for (let k = 0; k < debit_cards.length; k++) {
+        if (debit_cards[k].id === id_debit_card) {
+          found_card = debit_cards[k];
         }
       }
     }
-  
-    return found_card;
   }
+  return found_card;
+}
   
-  
-function clientCreditCard(id_client) {
-    const credit_cards = [];
-    const client_index = findClient(id_client);
-  
-    if (client_index !== -1 && clients[client_index].creditCards.length > 0) {
-      for (let i = 0; i < clients[client_index].creditCards.length; i++) {
-        credit_cards.push(clients[client_index].creditCards[i]);
-      }
+/**
+  * Busca las tarjetas de credito asociadas a un cliente por su id
+ * @param {int} id_client 
+ * @returns @param {Array} credit_cards
+*/
+function findCreditCardsByClientId(id_client) {
+  const credit_cards = [];
+  const client_index = findClientByClientId(id_client);
+
+  if (client_index !== -1 && clients[client_index].creditCards.length > 0) {
+    for (let i = 0; i < clients[client_index].creditCards.length; i++) {
+      credit_cards.push(clients[client_index].creditCards[i]);
     }
-    return credit_cards;
   }
+  return credit_cards;
+}
+
+
   
