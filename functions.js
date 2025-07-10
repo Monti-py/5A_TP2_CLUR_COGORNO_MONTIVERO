@@ -144,3 +144,16 @@ function findDebitCardMovementsByDebitCardId(id_debit_card){
   }
   return 0
 }
+
+function findCreditCardMovementsByCreditCardId(id_credit_card) {
+  let movements;
+  for (let i = 0; i < clients.length; i++) {
+    for (let j = 0; j < clients[i].creditCards.length; j++) {
+      if (clients[i].creditCards[j].id === id_credit_card) {
+        movements = clients[i].creditCards[j].movements
+        return movements
+      }
+    }
+  }
+  return 0
+}
