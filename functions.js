@@ -117,13 +117,28 @@ function findCreditCardByCreditCardId(id_credit_card) {
   return 0
 }
 
-function findMovementsBySavingsBankId(id_savings_bank) {
+function findSavingsBankMovementsBySavingsBankId(id_savings_bank) {
   let movements;
   for (let i = 0; i < clients.length; i++) {
     for (let j = 0; j < clients[i].savingsBanks.length; j++) {
       if (clients[i].savingsBanks[j].id === id_savings_bank) {
         movements = clients[i].savingsBanks[j].movements
         return movements
+      }
+    }
+  }
+  return 0
+}
+
+function findDebitCardMovementsByDebitCardId(id_debit_card){
+  let movements;
+  for (let i = 0; i < clients.length; i++) {
+    for (let j = 0; j < clients[i].savingsBanks.length; j++) {
+      for (let k = 0; k < clients[i].savingsBanks[j].debitCards.length;k++){
+      if (clients[i].savingsBanks[j].debitCards[k].id === id_debit_card) {
+        movements = clients[i].savingsBanks[j].debitCards[k].movements
+        return movements
+        }
       }
     }
   }
