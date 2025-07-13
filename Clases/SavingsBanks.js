@@ -26,10 +26,6 @@ class SavingsBanks {
         this.movements = [];
         this.alias = alias;
     }
-    depositarDinero(dinero_a_agregar) {
-        this.balance += dinero_a_agregar
-        return this.balance
-    }
     extraerDinero(monto_a_retirar) {
         if (this.currency !== "ARS") {
             if (monto_a_retirar > this.balance) {
@@ -41,11 +37,15 @@ class SavingsBanks {
         } else {
             if (monto_a_retirar > this.balance || this.balance + this.overdraft > monto_a_retirar) {
                 return 0
-            }else{
+            } else {
                 this.balance -= monto_a_retirar
                 return 1
             }
         }
+    }
+    depositarDinero(dinero_a_agregar) {
+        this.balance += dinero_a_agregar
+        return this.balance
     }
 }
 clients[0].savingsBanks.push(new SavingsBanks("ARS", "pepito", 1000000))
