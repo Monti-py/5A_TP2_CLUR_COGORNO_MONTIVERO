@@ -35,19 +35,39 @@ class SavingsBanks {
                 return 1
             }
         } else {
-            if (monto_a_retirar > this.balance || this.balance + this.overdraft > monto_a_retirar) {
-                return 0
-            } else {
+            if (monto_a_retirar < this.balance) {
                 this.balance -= monto_a_retirar
                 return 1
+            } else if (this.balance + this.limit - this.overdraft > monto_a_retirar) {
+                this.overdraft += monto_a_retirar - this.balance
+                this.balance = 0
+                return 1
+            } else {
+                return 0
             }
         }
     }
     depositarDinero(dinero_a_agregar) {
-        this.balance += dinero_a_agregar
-        return this.balance
+        if (this.currency !== "ARS") {
+            this.balance += dinero_a_agregar
+            return this.balance
+        } else {
+            if (this.overdraft > 0) {
+                this.overdraft -= dinero_a_agregar
+                if (this.overdraft < 0) {
+                    this.balance -= this.overdraft
+                    return this.balance
+                } else
+                    return -1
+            } else {
+                this.balance += dinero_a_agregar
+                return this.balance
+            }
+        }
     }
 }
+
+
 clients[0].savingsBanks.push(new SavingsBanks("ARS", "pepito", 1000000))
 clients[0].savingsBanks.push(new SavingsBanks("USD", "pepito",))
 clients[1].savingsBanks.push(new SavingsBanks("ARS", "john", 10000))
