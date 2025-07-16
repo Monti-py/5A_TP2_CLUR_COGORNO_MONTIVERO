@@ -3,7 +3,7 @@
  * @param {int} id_client 
  * @returns poscicion del cliente en el array
 */
-function findClientByClientId(id_client) {
+function findClientIndexByClientId(id_client) {
   for (let i = 0; i < clients.length; i++) {
     if (clients[i].id === id_client) {
       return i;
@@ -17,8 +17,8 @@ function findClientByClientId(id_client) {
  * @param {int} id_client 
  * @returns @param {Array} cajas_de_ahorro_del_cliente
 */
-function findClientSavingBankByClientId(id_client) {
-  const client_index = findClientByClientId(id_client);
+function findClientSavingBanksByClientId(id_client) {
+  const client_index = findClientIndexByClientId(id_client);
   const banks = []
   for (let i = 0; i < clients[client_index].savingsBanks.length; i++) {
     banks.push(clients[client_index].savingsBanks[i])
@@ -26,6 +26,32 @@ function findClientSavingBankByClientId(id_client) {
   return banks
 }
 
+
+/**
+ * Recide el id de una caja de ahorro y devuelve la poscicion en el array savingBanks de esa misma caja
+ * @param {int} id_savings_banks 
+ * @returns 
+ */
+function findClientIndexBySavingsBankId(id_savings_banks){
+  for (let i = 0; i < clients.length; i++){
+    for (let j= 0; i < clients[i].savingsBanks.length; j++){
+      if (clients[i].savingsBanks[j].id === id_savings_banks)
+        return i
+    }
+  }
+  return 0
+}
+
+function findSavingsBanksIndexBySavingsBanksId(id_savings_banks){
+  for(let i = 0; i < clients.length; i++){
+    for (let j = 0; j < clients[i].savingsBanks.length; j++){
+      if (clients[i].savingsBanks[j].id === id_savings_banks){
+        return j
+      }
+    }
+  }
+  return 0
+}
 /**
  * Recibe el id de un cliente y devuelve un array con todas sus tarjetas de debito
  * asociadas a sus cajas de ahorro
@@ -34,8 +60,8 @@ function findClientSavingBankByClientId(id_client) {
 */
 function findClientDebitCardsByClientId(id_client) {
   const debit_cards = []
-  const client_index = findClientByClientId(id_client)
-  const client_banks = findClientSavingBankByClientId(id_client)
+  const client_index = findClientIndexByClientId(id_client)
+  const client_banks = findClientSavingBanksByClientId(id_client)
   for (let i = 0; i < client_banks.length; i++) {
     debit_cards[i] = []
     if (clients[client_index].savingsBanks[i].debitCards.length > 0) {
@@ -47,19 +73,6 @@ function findClientDebitCardsByClientId(id_client) {
   }
   return debit_cards
 }
-
-/*function encontrarDebitCardPorId(idBuscado) {
-  for (const cliente of clients) {
-    for (const cuenta of cliente.savingsBanks) {
-      for (const tarjeta of cuenta.debitCards) {
-        if (tarjeta.id === idBuscado) {
-          return tarjeta;
-        }
-      }
-    }
-  }
-  return null; // No se encontró la tarjeta
-}*/
 
 
 /** 
@@ -91,7 +104,7 @@ function findDebitCardByDebitCardId(id_debit_card) {
 */
 function findCreditCardsByClientId(id_client) {
   const credit_cards = [];
-  const client_index = findClientByClientId(id_client);
+  const client_index = findClientIndexByClientId(id_client);
 
   if (client_index !== -1 && clients[client_index].creditCards.length > 0) {
     for (let i = 0; i < clients[client_index].creditCards.length; i++) {
@@ -117,11 +130,11 @@ function findCreditCardByCreditCardId(id_credit_card) {
   return 0
 }
 
-function findSavingsBankMovementsBySavingsBankId(id_savings_bank) {
+function findSavingsBankMovementsBySavingsBankId(id_savings_banks) {
   let movements;
   for (let i = 0; i < clients.length; i++) {
     for (let j = 0; j < clients[i].savingsBanks.length; j++) {
-      if (clients[i].savingsBanks[j].id === id_savings_bank) {
+      if (clients[i].savingsBanks[j].id === id_savings_banks) {
         movements = clients[i].savingsBanks[j].movements
         return movements
       }
