@@ -1,3 +1,27 @@
+window.onload = async function () {
+  try {
+    const response = await fetch('https://dolarapi.com/v1/dolares/oficial', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    if (!response.ok) {
+      Error("Error en la solicitud: ");
+    }
+    let data = await response.json();
+    let valorCompra = data.compra;
+    let valorVenta = data.venta;
+    const VALOR_DOLAR_OFICIAL = (valorCompra + valorVenta) / 2;
+
+    console.log("Valor de compra:", valorCompra);
+    console.log("Valor de venta:", valorVenta);
+    console.log("Promedio del dólar oficial:", VALOR_DOLAR_OFICIAL);
+  } catch (error) {
+    console.error("No se pudo obtener el valor del dolar", error);
+  }
+};
+
 /**
  * Busca el indice en el array "clientes" y devuelve la poscicion en el mismo
  * @param {int} id_client 
@@ -20,7 +44,7 @@ function findClientIndexByClientId(id_client) {
 function findClientSavingBanksByClientId(id_client) {
   const client_index = findClientIndexByClientId(id_client);
   const banks = []
-  for (let i = 0; i < clients[client_index].savingsBanks.length; i++) {
+  for (let i = 0; i < clients[client_index].savingsBanks.length; i++){
     banks.push(clients[client_index].savingsBanks[i])
   }
   return banks
@@ -34,7 +58,7 @@ function findClientSavingBanksByClientId(id_client) {
  */
 function findClientIndexBySavingsBankId(id_savings_banks){
   for (let i = 0; i < clients.length; i++){
-    for (let j= 0; i < clients[i].savingsBanks.length; j++){
+    for (let j = 0; i < clients[i].savingsBanks.length; j++){
       if (clients[i].savingsBanks[j].id === id_savings_banks)
         return i
     }
@@ -42,10 +66,10 @@ function findClientIndexBySavingsBankId(id_savings_banks){
   return 0
 }
 
-function findSavingsBanksIndexBySavingsBanksId(id_savings_banks){
-  for(let i = 0; i < clients.length; i++){
-    for (let j = 0; j < clients[i].savingsBanks.length; j++){
-      if (clients[i].savingsBanks[j].id === id_savings_banks){
+function findSavingsBanksIndexBySavingsBanksId(id_savings_banks) {
+  for (let i = 0; i < clients.length; i++) {
+    for (let j = 0; j < clients[i].savingsBanks.length; j++) {
+      if (clients[i].savingsBanks[j].id === id_savings_banks) {
         return j
       }
     }
@@ -143,14 +167,14 @@ function findSavingsBankMovementsBySavingsBankId(id_savings_banks) {
   return 0
 }
 
-function findDebitCardMovementsByDebitCardId(id_debit_card){
+function findDebitCardMovementsByDebitCardId(id_debit_card) {
   let movements;
   for (let i = 0; i < clients.length; i++) {
     for (let j = 0; j < clients[i].savingsBanks.length; j++) {
-      for (let k = 0; k < clients[i].savingsBanks[j].debitCards.length;k++){
-      if (clients[i].savingsBanks[j].debitCards[k].id === id_debit_card) {
-        movements = clients[i].savingsBanks[j].debitCards[k].movements
-        return movements
+      for (let k = 0; k < clients[i].savingsBanks[j].debitCards.length; k++) {
+        if (clients[i].savingsBanks[j].debitCards[k].id === id_debit_card) {
+          movements = clients[i].savingsBanks[j].debitCards[k].movements
+          return movements
         }
       }
     }
