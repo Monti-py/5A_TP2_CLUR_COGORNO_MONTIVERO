@@ -10,13 +10,11 @@ window.onload = async function () {
       Error("Error en la solicitud: ");
     }
     let data = await response.json();
-    let valorCompra = data.compra;
-    let valorVenta = data.venta;
-    const VALOR_DOLAR_OFICIAL = (valorCompra + valorVenta) / 2;
+    const VALOR_DOLAR_OFICIAL_COMPRA = data.compra;
+    const VALOR_DOLAR_OFICIAL_VENTA = data.venta;
 
-    console.log("Valor de compra:", valorCompra);
-    console.log("Valor de venta:", valorVenta);
-    console.log("Promedio del dólar oficial:", VALOR_DOLAR_OFICIAL);
+    console.log("Valor de compra:", VALOR_DOLAR_OFICIAL_COMPRA);
+    console.log("Valor de venta:", VALOR_DOLAR_OFICIAL_VENTA);
   } catch (error) {
     console.error("No se pudo obtener el valor del dolar", error);
   }

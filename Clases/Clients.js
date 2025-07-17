@@ -27,10 +27,10 @@ class Clients {
             return 0
         } else if (caja_emisor.extraerDinero(cantidad_moneda_origen)) {
             if (caja_emisor.currency === "ARS") {
-                let conversion = cantidad_moneda_origen / VALOR_DOLAR_OCIFIAL
+                let conversion = cantidad_moneda_origen / VALOR_DOLAR_OCIFIAL_VENTA
                 caja_receptor.depositarDinero(conversion)
             } else {
-                let conversion = VALOR_DOLAR_OCIFIAL * cantidad_moneda_origen
+                let conversion = VALOR_DOLAR_OCIFIAL_COMPRA * cantidad_moneda_origen
                 caja_receptor.depositarDinero(conversion)
             }
         } else {
