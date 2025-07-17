@@ -12,7 +12,6 @@ class Movements{
     }
 }
 
-console.log("a")
 // Movimientos de cuentas bancarias (SavingsBanks)
 clients[0].savingsBanks[0].movements.push(new Movements("YPF", 4000));       // Pepito
 clients[0].savingsBanks[1].movements.push(new Movements("Amazon", 120));    // Pepito en USD

@@ -210,41 +210,36 @@ function transferirDinero(monto, id_cuenta_origen, id_cuenta_destino) {
   }
 }
 function findClientIndexByClientDni(user_dni){
-  console.log(user_dni)
   for(let i = 0;i < clients.length;i++){
-    console.log(clients[i], clients[i].dni)
-    console.log(clients[i].dni == user_dni)
     if (clients[i].dni == user_dni ){
       return i
     }
   }
-  return -1
+  return -1 
 }
 
 function userLogin(){
   let dni= UI.getLoginDni();
   let password = UI.getLoginPassword()
   let nav = UI.getNavBarHome()
-  const CLIENT_INDEX = findClientIndexByClientDni(dni)
-  if(CLIENT_INDEX>-1 && clients[CLIENT_INDEX].password == password){
-    dni.style.display = none
-    password.style.display = none
-    alert("pepe")
+  const CLIENT_INDEX = findClientIndexByClientDni(dni.value)
+  if(CLIENT_INDEX>-1 && clients[CLIENT_INDEX].password == password.value){
+    document.getElementsByClassName("col-md-6")[0].style.display="none"
     nav.display = "block";
-    console.log("adentro")
+    alert("Login exitoso")
   }else{
     alert("usuario no existe")
   }
 }
 
 function userRegister(){
-  let dni= UI.getLoginDni();
+  let dni= UI.getLoginDni()
   let password = UI.getLoginPassword()
   let nav = UI.getNavBarHome()
   const CLIENT_INDEX = findClientIndexByClientDni(dni)
   if(CLIENT_INDEX>-1 && clients[CLIENT_INDEX].password == password){
-    dni.style.display = none
-    password.style.display = none
+    dni.style.display = "none"
+    password.style.display = "none"
     alert("pepe")
     nav.display = "block";
     console.log("adentro")
