@@ -1,3 +1,4 @@
+/**
 window.onload = async function () {
   try {
     const response = await fetch('https://dolarapi.com/v1/dolares/oficial', {
@@ -19,6 +20,7 @@ window.onload = async function () {
     console.error("No se pudo obtener el valor del dolar", error);
   }
 };
+*/
 
 /**
  * Busca el indice en el array "clientes" y devuelve la poscicion en el mismo
