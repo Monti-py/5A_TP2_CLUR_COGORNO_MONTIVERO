@@ -8,11 +8,12 @@ class Clients {
      * @param {string} name 
      * @param {string} lastName 
      */
-    constructor(dni, password, name, lastName) {
+    constructor(dni, password, email, name, lastName) {
         this.id = clientsId;
         clientsId++;
         this.dni = dni;
         this.password = password;
+        this.email = email;
         this.name = name;
         this.lastName = lastName;
         this.savingsBanks = [];
@@ -47,7 +48,7 @@ class Clients {
 }
 
 const clients = [] //crear 4
-clients.push(new Clients(45415066, "pepe", "papadopulus", "hernan"))
-clients.push(new Clients(45824885, "tronco", "juan", "firme"))
-clients.push(new Clients(12522546, "flash", "felipe", "bochornoso"))
-clients.push(new Clients(30303456, "balatro", "putito", "clorudo"))
+clients.push(new Clients(45415066, "pepe", "jiji@gmail.com","papadopulus", "hernan"))
+clients.push(new Clients(45824885, "tronco","jojo@gmail.com", "juan", "firme"))
+clients.push(new Clients(12522546, "flash","juju@gmail.com", "felipe", "bochornoso"))
+clients.push(new Clients(30303456, "balatro", "jaja@gmail.com","putito", "clorudo"))
