@@ -1,27 +1,30 @@
-/**
-window.onload = async function () {
-  try {
-    const response = await fetch('https://dolarapi.com/v1/dolares/oficial', {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-    if (!response.ok) {
-      Error("Error en la solicitud: ");
-    }
-    let data = await response.json();
-    const VALOR_DOLAR_OFICIAL_COMPRA = data.compra;
-    const VALOR_DOLAR_OFICIAL_VENTA = data.venta;
+const VALOR_DOLAR_OFICIAL_COMPRA = 1225;
+const VALOR_DOLAR_OFICIAL_VENTA = 1275;
 
-    console.log("Valor de compra:", VALOR_DOLAR_OFICIAL_COMPRA);
-    console.log("Valor de venta:", VALOR_DOLAR_OFICIAL_VENTA);
-  } catch (error) {
-    console.error("No se pudo obtener el valor del dolar", error);
-  }
-};
-*/
 
+// async function cargarDolar() {
+//   try {
+//     const response = await fetch('https://dolarapi.com/v1/dolares/oficial', {
+//       method: "GET",
+//       headers:{"Content-Type": "application/json"}
+//     });
+//     if (!response.ok) {
+//       Error("Error en la solicitud: ");
+//     }
+//     let data = await response.json();
+//     const VALOR_DOLAR_OFICIAL_COMPRA = data.compra;
+//     const VALOR_DOLAR_OFICIAL_VENTA = data.venta;
+
+//     console.log("Valor de compra:", VALOR_DOLAR_OFICIAL_COMPRA);
+//     console.log("Valor de venta:", VALOR_DOLAR_OFICIAL_VENTA);
+//   } catch (error) {
+//     console.error("No se pudo obtener el valor del dolar", error);
+//   }
+// };
+
+// cargarDolar ()
+
+// cargarDolar ()
 /**
  * Busca el indice en el array "clientes" y devuelve la poscicion en el mismo
  * @param {int} id_client 
