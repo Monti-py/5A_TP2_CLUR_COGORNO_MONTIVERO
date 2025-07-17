@@ -209,41 +209,55 @@ function transferirDinero(monto, id_cuenta_origen, id_cuenta_destino) {
     }
   }
 }
-function findClientIndexByClientDni(user_dni){
-  for(let i = 0;i < clients.length;i++){
-    if (clients[i].dni == user_dni ){
+function findClientIndexByClientDni(user_dni) {
+  for (let i = 0; i < clients.length; i++) {
+    if (clients[i].dni == user_dni) {
       return i
     }
   }
-  return -1 
+  return -1
 }
 
-function userLogin(){
-  let dni= UI.getLoginDni();
+function userLogin() {
+  let dni = UI.getLoginDni();
   let password = UI.getLoginPassword()
   let nav = UI.getNavBarHome()
   const CLIENT_INDEX = findClientIndexByClientDni(dni.value)
-  if(CLIENT_INDEX>-1 && clients[CLIENT_INDEX].password == password.value){
-    document.getElementsByClassName("col-md-6")[0].style.display="none"
+  if (CLIENT_INDEX > -1 && clients[CLIENT_INDEX].password == password.value) {
+    document.getElementsByClassName("col-md-6")[0].style.display = "none"
     nav.display = "block";
     alert("Login exitoso")
-  }else{
+  } else {
     alert("usuario no existe")
   }
 }
 
-function userRegister(){
-  let dni= UI.getLoginDni()
-  let password = UI.getLoginPassword()
+function userRegister() {
+  let name = UI.getRegisterName().value
+  let lastName = UI.getRegisterLastName().value
+  let dni = UI.getRegisterDni().value
+  let email = UI.getRegisterEmail().value
+  let password = UI.getRegisterPassword().value
   let nav = UI.getNavBarHome()
   const CLIENT_INDEX = findClientIndexByClientDni(dni)
-  if(CLIENT_INDEX>-1 && clients[CLIENT_INDEX].password == password){
-    dni.style.display = "none"
-    password.style.display = "none"
-    alert("pepe")
-    nav.display = "block";
-    console.log("adentro")
-  }else{
-    alert("usuario no existe")
+  if (name == "") {
+    alert("Por favor rellenar el espacio del nombre")
+  } else if (lastName == "") {
+    alert("Por favor rellenar el espacio del apellido")
+  } else if (dni.length < 7) {
+    alert("Por favor ingresar un DNI valido")
+  } else if (email == "") {
+    alert("Por favor rellenar el espacio del Email")
+  } else if (password.length < 4) {
+    alert("Por favor rellenar el espacio de la contraseña")
+  } else {
+    if (CLIENT_INDEX == -1) {
+      clients.push(new Clients(dni, password, email, name ,lastName ))
+      document.getElementsByClassName("col-md-6")[0].style.display = "none"
+      nav.display = "block";
+      alert("Registroso exitoso")
+    }else{
+      alert("Ya existe un usuario con este DNI")
+    }
   }
 }
