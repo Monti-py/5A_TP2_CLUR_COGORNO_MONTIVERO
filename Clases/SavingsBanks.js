@@ -26,6 +26,11 @@ class SavingsBanks {
         this.movements = [];
         this.alias = alias;
     }
+    /**
+     * la funcion recibe el monto que un cliente quiere retirar de su caja de ahorro y devuelve un boleano dependiendo si puede o no puede
+     * @param {int} monto_a_retirar 
+     * @returns {boolean} si se puede hacer la transaccion
+     */
     extraerDinero(monto_a_retirar) {
         if (this.currency !== "ARS") {
             if (monto_a_retirar > this.balance) {
@@ -47,6 +52,11 @@ class SavingsBanks {
             }
         }
     }
+    /**
+     * pepe
+     * @param {*} dinero_a_agregar 
+     * @returns 
+     */
     depositarDinero(dinero_a_agregar) {
         if (this.currency !== "ARS") {
             this.balance += dinero_a_agregar
@@ -73,5 +83,5 @@ clients[0].savingsBanks.push(new SavingsBanks("USD", "pepito",))
 clients[1].savingsBanks.push(new SavingsBanks("ARS", "john", 10000))
 clients[1].savingsBanks.push(new SavingsBanks("USD", "john",))
 clients[2].savingsBanks.push(new SavingsBanks("ARS", "primo.de.pepito", 10000000))
-clients[2].savingsBanks.push(new SavingsBanks("INR", "primo.de.pepito",))
+clients[2].savingsBanks.push(new SavingsBanks("ARS", "primo.de.pepito",))
 clients[3].savingsBanks.push(new SavingsBanks("ARS", "Jorge",))
