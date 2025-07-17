@@ -1,9 +1,9 @@
 class UserInterface{
     getLoginDni(){
-        return document.getElementById("loginDni").value
+        return document.getElementById("loginDni")
     }
     getLoginPassword(){
-        return document.getElementById("loginPassword").value
+        return document.getElementById("loginPassword")
     }
     getNavBarHome(){
         let nav = document.getElementsByClassName("navbar-toggler")
