@@ -99,7 +99,6 @@ function findClientDebitCardsByClientId(id_client) {
   return debit_cards
 }
 
-
 /** 
  * Bysca una tarjeta de debito por su id y devuelve el objeto tarjeta
  * @param {int} id_client 
@@ -260,4 +259,8 @@ function userRegister() {
       alert("Ya existe un usuario con este DNI")
     }
   }
+}
+
+function logOut(){
+  UI.changeScreen(2)
 }
