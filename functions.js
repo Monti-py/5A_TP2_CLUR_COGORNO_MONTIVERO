@@ -23,8 +23,6 @@ const VALOR_DOLAR_OFICIAL_VENTA = 1275;
 // };
 
 // cargarDolar ()
-
-// cargarDolar ()
 /**
  * Busca el indice en el array "clientes" y devuelve la poscicion en el mismo
  * @param {int} id_client 
@@ -209,5 +207,48 @@ function transferirDinero(monto, id_cuenta_origen, id_cuenta_destino) {
     } else {
       return 0;
     }
+  }
+}
+function findClientIndexByClientDni(user_dni){
+  console.log(user_dni)
+  for(let i = 0;i < clients.length;i++){
+    console.log(clients[i], clients[i].dni)
+    console.log(clients[i].dni == user_dni)
+    if (clients[i].dni == user_dni ){
+      return i
+    }
+  }
+  return -1
+}
+
+function userLogin(){
+  let dni= UI.getLoginDni();
+  let password = UI.getLoginPassword()
+  let nav = UI.getNavBarHome()
+  const CLIENT_INDEX = findClientIndexByClientDni(dni)
+  if(CLIENT_INDEX>-1 && clients[CLIENT_INDEX].password == password){
+    dni.style.display = none
+    password.style.display = none
+    alert("pepe")
+    nav.display = "block";
+    console.log("adentro")
+  }else{
+    alert("usuario no existe")
+  }
+}
+
+function userRegister(){
+  let dni= UI.getLoginDni();
+  let password = UI.getLoginPassword()
+  let nav = UI.getNavBarHome()
+  const CLIENT_INDEX = findClientIndexByClientDni(dni)
+  if(CLIENT_INDEX>-1 && clients[CLIENT_INDEX].password == password){
+    dni.style.display = none
+    password.style.display = none
+    alert("pepe")
+    nav.display = "block";
+    console.log("adentro")
+  }else{
+    alert("usuario no existe")
   }
 }
