@@ -27,11 +27,18 @@ class UserInterface{
     changeScreen(input){
         switch(input){
             case 1:
-                //login y newUser
-            break
-            case 2: 
-                document.getElementById("loginForm").style.display = "block";
-                document.getElementsByClassName("navbar-toggler").style.display = "none";
+                document.getElementById("user-account").style.display = "none"
+                document.getElementById("bank-functions").classList.remove("d-none")
+                document.getElementById("bank-functions").classList.add("d-block")
+                document.getElementsByClassName("navbar-toggler")[0].classList.remove("d-none")
+                document.getElementsByClassName("navbar-toggler")[0].classList.add("d-block")
+                break
+                case 2: 
+                document.getElementById("user-account").style.display = "block";
+                document.getElementById("bank-functions").classList.remove("d-block")
+                document.getElementById("bank-functions").classList.add("d-none")
+                document.getElementsByClassName("navbar-toggler")[0].classList.remove("d-block")
+                document.getElementsByClassName("navbar-toggler")[0].classList.add("d-none")
             break
         }
     }

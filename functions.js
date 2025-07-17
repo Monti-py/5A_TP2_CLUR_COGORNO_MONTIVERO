@@ -220,11 +220,10 @@ function findClientIndexByClientDni(user_dni) {
 function userLogin() {
   let dni = UI.getLoginDni();
   let password = UI.getLoginPassword()
-  let nav = UI.getNavBarHome()
   const CLIENT_INDEX = findClientIndexByClientDni(dni.value)
+  
   if (CLIENT_INDEX > -1 && clients[CLIENT_INDEX].password == password.value) {
-    document.getElementsByClassName("col-md-6")[0].style.display = "none"
-    nav.display = "block";
+    UI.changeScreen(1)
     alert("Login exitoso")
   } else {
     alert("usuario no existe")
@@ -237,27 +236,27 @@ function userRegister() {
   let dni = UI.getRegisterDni().value
   let email = UI.getRegisterEmail().value
   let password = UI.getRegisterPassword().value
-  let nav = UI.getNavBarHome()
   const CLIENT_INDEX = findClientIndexByClientDni(dni)
   if (name == "") {
     alert("Por favor rellenar el espacio del nombre")
-  } else if (lastName == "") {
+  } 
+  if (lastName == "") {
     alert("Por favor rellenar el espacio del apellido")
-  } else if (dni.length < 7) {
+  }  
+  if (dni.length < 7) {
     alert("Por favor ingresar un DNI valido")
-  } else if (email == "") {
+  } 
+  if (email == "") {
     alert("Por favor rellenar el espacio del Email")
-  } else if (password.length < 4) {
+  } 
+  if (password.length < 4) {
     alert("Por favor rellenar el espacio de la contraseña")
-  } else {
+  }  
     if (CLIENT_INDEX == -1) {
       clients.push(new Clients(dni, password, email, name ,lastName ))
-      document.getElementsByClassName("col-md-6")[0].style.display = "none"
-      nav.display = "block";
+    UI.changeScreen(1)
       alert("Registroso exitoso")
     }else{
-      alert("Ya existe un usuario con este DNI")
-    }
   }
 }
 
