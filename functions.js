@@ -44,7 +44,7 @@ function findClientIndexByClientId(id_client) {
 function findClientSavingBanksByClientId(id_client) {
   const client_index = findClientIndexByClientId(id_client);
   const banks = []
-  for (let i = 0; i < clients[client_index].savingsBanks.length; i++){
+  for (let i = 0; i < clients[client_index].savingsBanks.length; i++) {
     banks.push(clients[client_index].savingsBanks[i])
   }
   return banks
@@ -56,9 +56,9 @@ function findClientSavingBanksByClientId(id_client) {
  * @param {int} id_savings_banks 
  * @returns 
  */
-function findClientIndexBySavingsBankId(id_savings_banks){
-  for (let i = 0; i < clients.length; i++){
-    for (let j = 0; i < clients[i].savingsBanks.length; j++){
+function findClientIndexBySavingsBankId(id_savings_banks) {
+  for (let i = 0; i < clients.length; i++) {
+    for (let j = 0; i < clients[i].savingsBanks.length; j++) {
       if (clients[i].savingsBanks[j].id === id_savings_banks)
         return i
     }
@@ -193,4 +193,18 @@ function findCreditCardMovementsByCreditCardId(id_credit_card) {
     }
   }
   return 0
+}
+function transferirDinero(monto, id_cuenta_origen, id_cuenta_destino) {
+  const ORIGEN = clients[findClientIndexBySavingsBankId(id_cuenta_origen)];
+  const DESTINO = clients[findClientIndexBySavingsBankId(id_cuenta_destino)];
+  if (ORIGEN.currency !== DESTINO.currency) {
+    return -1;
+  } else {
+    if (ORIGEN.extraerDinero(monto)) {
+      DESTINO.depositarDinero(monto);
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 }

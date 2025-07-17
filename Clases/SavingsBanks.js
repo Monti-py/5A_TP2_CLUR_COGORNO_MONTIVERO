@@ -18,7 +18,7 @@ class SavingsBanks {
         savingsBanksId++;
         this.currency = currency;
         this.balance = 0;
-        if(currency == "ARS") {
+        if (currency == "ARS") {
             this.limit = limit;
             this.overdraft = 0;
         }
@@ -75,20 +75,20 @@ class SavingsBanks {
             }
         }
     }
-    registerMovement(monto,tercero,fecha){
+    registerMovement(monto, tercero, fecha) {
         try {
-            this.movements.push(new Movements(tercero,monto));
+            this.movements.push(new Movements(tercero, monto));
             return 1
         } catch (error) {
             return 0
         }
-
     }
+    
 }
-clients[0].savingsBanks.push(new SavingsBanks("ARS","pepito",100000))
-clients[0].savingsBanks.push(new SavingsBanks("USD","pepito"))
-clients[1].savingsBanks.push(new SavingsBanks("ARS","john",1000))
-clients[1].savingsBanks.push(new SavingsBanks("USD","john"))
-clients[2].savingsBanks.push(new SavingsBanks("ARS","primo.de.pepito",20000))
-clients[2].savingsBanks.push(new SavingsBanks("ARS","primo.de.pepito",10000000))
-clients[3].savingsBanks.push(new SavingsBanks("ARS","Jorge",500))
+clients[0].savingsBanks.push(new SavingsBanks("ARS", "pepito", 100000))
+clients[0].savingsBanks.push(new SavingsBanks("USD", "pepito"))
+clients[1].savingsBanks.push(new SavingsBanks("ARS", "john", 1000))
+clients[1].savingsBanks.push(new SavingsBanks("USD", "john"))
+clients[2].savingsBanks.push(new SavingsBanks("ARS", "primo.de.pepito", 20000))
+clients[2].savingsBanks.push(new SavingsBanks("ARS", "primo.de.pepito", 10000000))
+clients[3].savingsBanks.push(new SavingsBanks("ARS", "Jorge", 500))

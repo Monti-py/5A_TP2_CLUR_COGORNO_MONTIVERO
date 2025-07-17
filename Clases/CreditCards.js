@@ -1,6 +1,6 @@
 let creditCardIds = 1;
 
-class CreditCard extends Cards{
+class CreditCard extends Cards {
     /**
      * @param {string} provider  
      * @param {Int16Array} securityCode 
@@ -19,15 +19,30 @@ class CreditCard extends Cards{
         this.closeDate = closeDate;
         this.expiresBalanceDate = expiresBalanceDate;
     }
-    registerMovement(monto,tercero,fecha,cuotas){
+    registerMovement(monto, tercero, fecha, cuotas) {
         this.balance += monto;
         console.log(this.expireDate)
-        if(this.expireDate < fecha){
-            this.movements.push(new Movements(tercero,monto,cuotas));
+        if (this.expireDate < fecha) {
+            this.movements.push(new Movements(tercero, monto, cuotas));
             return 1
         } else {
             return 0
         }
+    }
+    payCreditCard(monto) {
+        this.balance += monto;
+
+        if (monto < this.balance * 10 / 100) {
+            return -1
+        } else {
+            this.balance += monto;
+            if (this.balance >= 0) {
+                return 1
+            } else {
+                return 0
+            }
+        }
+
     }
     //Esto no es la realidad, es por simplificar
     //Si el cliente usa el pago mínimo o paga menos del total
