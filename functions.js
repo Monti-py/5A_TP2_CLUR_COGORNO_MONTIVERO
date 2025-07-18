@@ -1,28 +1,23 @@
-const VALOR_DOLAR_OFICIAL_COMPRA = 1225;
-const VALOR_DOLAR_OFICIAL_VENTA = 1275;
+async function cargarDolar() {
+  try {
+    const response = await fetch('https://dolarapi.com/v1/dolares/oficial', {
+      method: "GET",
+    });
+    if (!response.ok) {
+      Error("Error en la solicitud: ");
+    }
+    let data = await response.json();
+    const VALOR_DOLAR_OFICIAL_COMPRA = data.compra;
+    const VALOR_DOLAR_OFICIAL_VENTA = data.venta;
 
+    console.log("Valor de compra:", VALOR_DOLAR_OFICIAL_COMPRA);
+    console.log("Valor de venta:", VALOR_DOLAR_OFICIAL_VENTA);
+  } catch (error) {
+    console.error("No se pudo obtener el valor del dolar", error);
+  }
+};
 
-// async function cargarDolar() {
-//   try {
-//     const response = await fetch('https://dolarapi.com/v1/dolares/oficial', {
-//       method: "GET",
-//       headers:{"Content-Type": "application/json"}
-//     });
-//     if (!response.ok) {
-//       Error("Error en la solicitud: ");
-//     }
-//     let data = await response.json();
-//     const VALOR_DOLAR_OFICIAL_COMPRA = data.compra;
-//     const VALOR_DOLAR_OFICIAL_VENTA = data.venta;
-
-//     console.log("Valor de compra:", VALOR_DOLAR_OFICIAL_COMPRA);
-//     console.log("Valor de venta:", VALOR_DOLAR_OFICIAL_VENTA);
-//   } catch (error) {
-//     console.error("No se pudo obtener el valor del dolar", error);
-//   }
-// };
-
-// cargarDolar ()
+cargarDolar()
 /**
  * Busca el indice en el array "clientes" y devuelve la poscicion en el mismo
  * @param {int} id_client 
@@ -221,7 +216,7 @@ function userLogin() {
   let dni = UI.getLoginDni();
   let password = UI.getLoginPassword()
   const CLIENT_INDEX = findClientIndexByClientDni(dni.value)
-  
+
   if (CLIENT_INDEX > -1 && clients[CLIENT_INDEX].password == password.value) {
     UI.changeScreen(1)
     alert("Login exitoso")
@@ -237,29 +232,40 @@ function userRegister() {
   let email = UI.getRegisterEmail().value
   let password = UI.getRegisterPassword().value
   const CLIENT_INDEX = findClientIndexByClientDni(dni)
+  let noLoguear = false
+  let dniValue = parseInt(dni)
   if (name == "") {
     alert("Por favor rellenar el espacio del nombre")
-  } 
+    noLoguear = true
+  }
   if (lastName == "") {
     alert("Por favor rellenar el espacio del apellido")
-  }  
+    noLoguear = true
+  }
   if (dni.length < 7) {
     alert("Por favor ingresar un DNI valido")
-  } 
+    noLoguear = true
+  }
   if (email == "") {
     alert("Por favor rellenar el espacio del Email")
-  } 
+    noLoguear = true
+  }
   if (password.length < 4) {
     alert("Por favor rellenar el espacio de la contraseña")
-  }  
-    if (CLIENT_INDEX == -1) {
-      clients.push(new Clients(dni, password, email, name ,lastName ))
+    noLoguear = true
+  }
+  if (!noLoguear && CLIENT_INDEX == -1) {
+    clients.push(new Clients(dniValue, password, email, name, lastName))
     UI.changeScreen(1)
-      alert("Registroso exitoso")
-    }else{
+    alert("Registroso exitoso")
+  } else if (!noLoguear && CLIENT_INDEX != -1) {
+    alert("Ya existe un usuario con ese DNI")
   }
 }
 
-function logOut(){
+function logOut() {
+  alert("esto anda")
+  UI.clearLoginInputs()
   UI.changeScreen(2)
+  UI.logOutFade()
 }
