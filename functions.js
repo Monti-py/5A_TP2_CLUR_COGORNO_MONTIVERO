@@ -1,11 +1,7 @@
-/**
-window.onload = async function () {
+async function cargarDolar() {
   try {
     const response = await fetch('https://dolarapi.com/v1/dolares/oficial', {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
     });
     if (!response.ok) {
       Error("Error en la solicitud: ");
@@ -20,8 +16,8 @@ window.onload = async function () {
     console.error("No se pudo obtener el valor del dolar", error);
   }
 };
-*/
 
+cargarDolar()
 /**
  * Busca el indice en el array "clientes" y devuelve la poscicion en el mismo
  * @param {int} id_client 
@@ -97,7 +93,6 @@ function findClientDebitCardsByClientId(id_client) {
   }
   return debit_cards
 }
-
 
 /** 
  * Bysca una tarjeta de debito por su id y devuelve el objeto tarjeta
@@ -207,4 +202,70 @@ function transferirDinero(monto, id_cuenta_origen, id_cuenta_destino) {
       return 0;
     }
   }
+}
+function findClientIndexByClientDni(user_dni) {
+  for (let i = 0; i < clients.length; i++) {
+    if (clients[i].dni == user_dni) {
+      return i
+    }
+  }
+  return -1
+}
+
+function userLogin() {
+  let dni = UI.getLoginDni();
+  let password = UI.getLoginPassword()
+  const CLIENT_INDEX = findClientIndexByClientDni(dni.value)
+
+  if (CLIENT_INDEX > -1 && clients[CLIENT_INDEX].password == password.value) {
+    UI.changeScreen(1)
+    alert("Login exitoso")
+  } else {
+    alert("usuario no existe")
+  }
+}
+
+function userRegister() {
+  let name = UI.getRegisterName().value
+  let lastName = UI.getRegisterLastName().value
+  let dni = UI.getRegisterDni().value
+  let email = UI.getRegisterEmail().value
+  let password = UI.getRegisterPassword().value
+  const CLIENT_INDEX = findClientIndexByClientDni(dni)
+  let noLoguear = false
+  let dniValue = parseInt(dni)
+  if (name == "") {
+    alert("Por favor rellenar el espacio del nombre")
+    noLoguear = true
+  }
+  if (lastName == "") {
+    alert("Por favor rellenar el espacio del apellido")
+    noLoguear = true
+  }
+  if (dni.length < 7) {
+    alert("Por favor ingresar un DNI valido")
+    noLoguear = true
+  }
+  if (email == "") {
+    alert("Por favor rellenar el espacio del Email")
+    noLoguear = true
+  }
+  if (password.length < 4) {
+    alert("Por favor rellenar el espacio de la contraseña")
+    noLoguear = true
+  }
+  if (!noLoguear && CLIENT_INDEX == -1) {
+    clients.push(new Clients(dniValue, password, email, name, lastName))
+    UI.changeScreen(1)
+    alert("Registroso exitoso")
+  } else if (!noLoguear && CLIENT_INDEX != -1) {
+    alert("Ya existe un usuario con ese DNI")
+  }
+}
+
+function logOut() {
+  alert("esto anda")
+  UI.clearLoginInputs()
+  UI.changeScreen(2)
+  UI.logOutFade()
 }
